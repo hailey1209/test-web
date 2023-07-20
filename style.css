@@ -1,75 +1,88 @@
-body, * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  position: relative;
-}
-
 body {
-  background: darkolivegreen;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url(/imgs/bg-img.jpg);
+  min-height: 300vh;
+  position: relative;
+  z-index: -10;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
-.nav {
-  width: 100%;
-  height: 80px;
-  background-color: white;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  z-index: 1;
-  position: fixed;
-  padding-right: 100px;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
-}
-.nav button {
-  margin: 5px 10px;
+.open-btn {
   border: none;
-  border-radius: 10px;
-  background-color: white;
-  width: 120px;
-  height: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   font-weight: bold;
   font-size: 1rem;
-  color: darkgreen;
   cursor: pointer;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
-.nav button:hover {
-  color: white;
-  background-color: rgba(0, 100, 0, 0.5);
-  border: 2px solid white;
+.open-btn:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .container {
-  width: 80%;
-  height: 100vh;
-  position: relative;
-  top: 80px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: auto;
-}
-.container .card {
-  flex: 300px;
-  margin: 10px;
-  background-color: black;
-  border-radius: 10px;
-  overflow: hidden;
-  font-size: 1rem;
-  color: white;
-  text-align: center;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: 0.2s;
-}
-.container .card:hover {
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-  transform: scale(0.95);
-}
-.container .card img {
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
-  height: 85%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: -1;
 }
-.container .card .title {
-  margin: 5px auto;
+
+.modal-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  width: 500px;
+  height: 300px;
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  line-height: 300px;
+  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.5);
+  z-index: 1;
+  display: none;
+  transition: 0.5s;
+}
+.modal-window button {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 2;
+}
+.modal-window button:hover {
+  box-shadow: 0 0 0.2rem white;
+}
+
+.show {
+  display: block;
+}
+
+.hidden {
+  display: none;
 }/*# sourceMappingURL=style.css.map */
