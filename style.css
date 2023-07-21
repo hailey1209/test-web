@@ -67,28 +67,37 @@ body::-webkit-scrollbar {
   background-color: darkcyan;
   color: white;
 }
-
-.open-btn {
-  border: none;
-  background-color: rgba(255, 255, 255, 0.5);
-  width: 100px;
-  height: 100px;
+.nav .person {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav .person .avatar {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  border: 3px solid lightgray;
+  background-color: darkcyan;
+  display: inline-block;
+  margin: 20px;
+}
+.nav .person .open-btn {
+  border: none;
+  background-color: rgba(211, 211, 211, 0.8);
+  border: 1px solid lightgray;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 2;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  display: inline-block;
 }
-.open-btn:hover {
-  background-color: rgba(255, 255, 255, 0.8);
+.nav .person .open-btn:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
-
-.top {
+.nav .person .top {
   z-index: 2;
   width: 50px;
   height: 50px;
@@ -104,32 +113,30 @@ body::-webkit-scrollbar {
 }
 
 .container {
-  position: fixed;
+  position: relative;
   left: 0;
   top: 0;
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
-  z-index: -1;
 }
 
 .modal-window {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
-  width: 500px;
-  height: 300px;
+  width: 300px;
+  height: 60px;
   color: white;
+  font-weight: bold;
   font-size: 1rem;
   border-radius: 0.5rem;
-  padding: 20px;
   box-shadow: 0 0 1rem rgba(255, 255, 255, 0.5);
-  z-index: 1;
+  z-index: 10;
+  text-align: center;
+  line-height: 30px;
   display: none;
   transition: 0.5s;
   overflow: auto;
@@ -143,21 +150,17 @@ body::-webkit-scrollbar {
 }
 .modal-window .close-btn {
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0);
   color: white;
   border: none;
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 15px;
   cursor: pointer;
   z-index: 3;
   text-align: center;
-  padding: 3px;
-}
-.modal-window .close-btn:hover {
-  box-shadow: 0 0 0.2rem white;
 }
 .modal-window img {
   width: 200px;
@@ -185,10 +188,33 @@ body::-webkit-scrollbar {
   display: block;
 }
 
-.padding {
-  padding-right: 13px;
-}
-
 .hidden {
   display: none;
+}
+
+.scroll-box {
+  width: 100%;
+  height: 100vh;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+.scroll-box .scroll-container {
+  width: 80%;
+  height: 400px;
+  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: auto;
+}
+.scroll-box .scroll-container .item {
+  background-color: white;
+  flex: 1 0 auto;
+  width: 400px;
+  height: 100%;
+  margin-right: 20px;
 }/*# sourceMappingURL=style.css.map */

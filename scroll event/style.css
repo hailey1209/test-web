@@ -1,0 +1,42 @@
+body{
+    background-image: url(https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg);
+    /* height: 300vh; */
+}
+.container{
+    display: flex;
+    width: 80%; 
+    height: 200px;
+    margin: 100px auto;
+    overflow-x: auto;
+    /* border: 3px solid red; */
+  }
+  .container .item{
+    width: 200px;
+    height: 100%;
+    margin-right: 10px;
+    background-color: rgba(0, 0, 0, .2);
+    backdrop-filter: blur(3px);
+    flex: 1 0 auto;
+    line-height: 200px;
+    font-size: 5rem;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .container .item:hover{
+    box-shadow: 0 0 0.5rem white;
+  }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.container::-webkit-scrollbar , body::-webkit-scrollbar{
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .active{
+    transform: scale(1.02);
+  }
