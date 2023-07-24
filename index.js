@@ -7,6 +7,7 @@ const backToTop = document.querySelector('.top')
 const nav = document.querySelector('.nav')
 const navBtn = document.querySelectorAll(".menu")
 const navBar = document.getElementsByClassName("dropdown-content")
+const itemBox = document.querySelector('.scroll-container')
 
 console.log(btn.getBoundingClientRect())
 function openModal(){
@@ -90,36 +91,58 @@ function loadAPI(url){
   return fetch(url)
   .then(response => response.json())
 }
-function loadAPIData(artists){
-  const dataArr = []
-  return fetch('http://api.kcisa.kr/API_CNV_048/request?serviceKey=ca1cbaa4-c972-481d-b9af-93c6f89fdd28&numOfRows=10&pageNo=1')
+
+function loadAPIData(data){
+  return fetch(`http://universities.hipolabs.com/search?country=United+States`)
   .then(response => response.json())
-  .then(response => dataArr.push.apply(response.artists.items))
-  .then(response => console.log(response))
 }
+
 function showData(data){
-  new Promise(function(resolve,reject) {  
-    const scrollContainer = document.querySelector('.scroll-container')
-    for( let i=0; i < data.length; i++){
-        const respone = data[i]
-        const arr =[]
-        arr.push(respone.artists, respone.countries, respone.trending, respone.videos)
-        console.log(arr)
+  // console.log(data)
+  return new Promise(function(resolve, reject){
 
-        const img = document.createElement('img')
-        img.src = respone.medium_cover_image
-        card.appendChild(img)
+    for(let i=0; i < 20; i++){
+      // console.log(data[0].domains.web_pages)
+      // const data = response
 
-        const title = document.createElement('div')
-        title.className ='title'
-        title.innerHTML = `<h3>${respone.title}</h3>
-                           <p>${respone.genres}</p>`
-        card.appendChild(title)
-        container.append(card)
+      const contentBox = document.createElement('div')
+      contentBox.className = 'content-box'
+      contentBox.innerHTML = `<h2>${data[i].name}</h2>
+                              <p>${data[i].country}</p>
+                              <a href = "${data[i].web_pages}">${data[i].web_pages}</a>`
+      itemBox.appendChild(contentBox)
     }
-})
+  })
 }
 
-loadAPI('http://api.kcisa.kr/API_CNV_048/request?serviceKey=ca1cbaa4-c972-481d-b9af-93c6f89fdd28&numOfRows=10&pageNo=1')
+loadAPI('http://universities.hipolabs.com/search?country=United+States')
 .then(data => loadAPIData(data))
 .then(data => showData(data))
+
+// 마우스 스크롤 이벤트 
+let isDown = false
+let startX
+let scrollLeft
+
+itemBox.addEventListener('mousedown', e => {
+  isDown = true
+  itemBox.classList.add('scroll-active')
+  startX = e.pageX - itemBox.offsetLeft
+  scrollLeft = itemBox.scrollLeft
+})
+
+function deactive(){
+  isDown = false
+  itemBox.classList.remove('scroll-active')
+}
+
+itemBox.addEventListener('mouseleave', deactive)
+itemBox.addEventListener('mouseup', deactive)
+
+itemBox.addEventListener('mousemove', e => {
+  if(!isDown) return
+  e.preventDefault()
+  const x= e.pageX -itemBox.offsetLeft
+  const walk = x - startX
+  itemBox.scrollLeft = scrollLeft - walk
+})

@@ -31,6 +31,9 @@ body::-webkit-scrollbar {
 .nav h1 {
   cursor: pointer;
 }
+.nav .hambtn {
+  display: none;
+}
 .nav .menu {
   background-color: white;
   position: relative;
@@ -200,7 +203,7 @@ body::-webkit-scrollbar {
 }
 .scroll-box .scroll-container {
   width: 80%;
-  height: 400px;
+  height: 200px;
   margin: auto;
   position: fixed;
   top: 50%;
@@ -210,11 +213,54 @@ body::-webkit-scrollbar {
   justify-content: space-between;
   align-items: center;
   overflow-x: auto;
+  overflow-y: hidden;
+  z-index: 5;
 }
-.scroll-box .scroll-container .item {
-  background-color: white;
+.scroll-box .scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.scroll-box .scroll-container .content-box {
   flex: 1 0 auto;
-  width: 400px;
+  width: 350px;
   height: 100%;
-  margin-right: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-radius: 20px;
+  margin-right: 10px;
+  text-align: center;
+}
+.scroll-box .scroll-container .content-box * {
+  margin: 10px;
+}
+.scroll-box .scroll-container .content-box a {
+  color: rgba(0, 0, 0, 0.9);
+  text-decoration: none;
+}
+
+.scroll-active {
+  transform: scale(1.02);
+}
+
+@media (max-width: 785px) {
+  .nav h1 {
+    font-size: 1.5rem;
+  }
+  .nav .person .avatar {
+    width: 30px;
+    height: 30px;
+  }
+  .nav .person .open-btn {
+    width: 60px;
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 695px) {
+  .nav h1 {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .nav .menu {
+    display: none;
+  }
 }/*# sourceMappingURL=style.css.map */
