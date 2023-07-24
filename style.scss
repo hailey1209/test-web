@@ -220,8 +220,8 @@ body{
 
     .scroll-container{
         // border: 1px solid red;
-        width: 80%;
-        height: 200px;
+        width: 90%;
+        height: 450px;
         margin: auto;
         position: fixed;
         top: 50%;
@@ -233,33 +233,101 @@ body{
         align-items: center;
         overflow-x: auto;
         overflow-y: hidden;
-        z-index: 5;
 
         &::-webkit-scrollbar{
             display: none;
         }
+
         .content-box{
             flex: 1 0 auto;
-            width: 350px;
+            width: 600px;
             height: 100%;
             background-color: rgba($color: #000000, $alpha: 0.3);
             color: white;
             border-radius: 20px;
-            margin-right: 10px;
+            margin-right: 20px;
             text-align: center;
-            & *{
-                margin:10px;
+            display: flex;
+            align-items: center;
+
+            &:hover{
+                box-shadow: 0 0 0.8rem rgba($color: #000000, $alpha: 0.3);
+                transform: scale(0.95);
             }
-            a{
-                color: rgba($color: #000000, $alpha: 0.9);
-                text-decoration: none;   
+
+            h2{
+                font-size: 2rem;
             }
-            
+            button{
+                background-color: orange;
+                color: white;
+                font-size: 1rem;
+                font-weight: bold;
+                position: absolute;
+                bottom: 50px;
+                left: 30px;
+                width: 120px;
+                height: 50px;
+                border: none;
+                border-radius: 30px;
+                cursor: pointer;
+            }
+            .img{
+                width: 90%;
+                height: 90%;
+                overflow: hidden;
+                border-radius: 20px;
+                margin-right: 20px;
+            }
         }
     }
 }
 .scroll-active{
     transform: scale(1.02);
+}
+.article{
+    width: 800px;
+    height: 500px;
+    margin: auto;
+    // border: 1px solid red;
+    position: relative;
+    top: -600px;
+    // overflow: hidden;
+
+    .cards{
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+        .details{
+            border: 15px solid white;
+            flex: 1 0 auto;
+            width: 95%;
+            height: 95%;
+            padding: 0;
+            margin: 0 10px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            h2{
+                margin: 0;
+                font-size: 3rem;
+                text-shadow: 0 0 1rem rgba($color: #000000, $alpha: 0.3);
+            }
+            p{
+                font-size: 2rem;
+                color: white;
+            }
+            a{
+                font-size: 1.5rem;
+                text-decoration: none;
+                color: lightpink;
+            }
+        }
+    }
 }
 @media (max-width:785px){
     .nav{
