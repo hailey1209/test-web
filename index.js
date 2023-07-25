@@ -6,11 +6,32 @@ const container = document.querySelector('.container')
 const backToTop = document.querySelector('.top')
 const nav = document.querySelector('.nav')
 const navBtn = document.querySelectorAll(".menu")
-const navBar = document.getElementsByClassName("dropdown-content")
-const itemContainer = document.querySelector('scroll-box')
-const itemBox = document.querySelector('.scroll-container')
-
+const navBar = document.querySelectorAll("dropdown-content")
 console.log(btn.getBoundingClientRect())
+
+
+// 테마 변경(다크 / 일반)
+window.onload = () => {
+  const mode = document.querySelector('.mode')
+  const icons = document.querySelectorAll('.material-symbols-outlined')
+  const menuBtn = document.querySelectorAll('.nav-btn')
+  nav
+  mode.addEventListener('click', (e) => {
+    document.body.classList.toggle('dark')
+    nav.classList.toggle('dark')
+    
+    for(let btn of menuBtn){  //메뉴 버튼이 여러개라서 for문으로 돌려서 하나씩 지정해줌
+      btn.classList.toggle('dark')
+    }
+    for(let icon of icons){  //모드 버튼의 display설정 변경
+      icon.classList.contains('show') ? 
+      icon.classList.remove('show')
+      : icon.classList.add('show')
+    }
+    console.log(e.target)
+  })
+}
+
 // 모달창 열기
 function openModal(){
   let btnPsition = btn.getBoundingClientRect()
@@ -36,58 +57,53 @@ function closeModal(){
   document.body.style.overflow = "auto"
   console.log(document.body.clientWidth)
 }
+btn.addEventListener('click', openModal)
+closeBtn.removeEventListener('click', openModal)
+closeBtn.addEventListener('click', closeModal)
+
 //모달창 내 위로가기
 function toTop(){
  document.documentElement.scrollTo({top:0, left:0, behavior: 'smooth'})
 }
 // 스크롤 내렷을때 네비게이션 나오게하기
-function scrollAct(){
-  const pageYOffset = window.pageYOffset
-  if(pageYOffset > 0 && pageYOffset < 60){
-    backToTop.classList.add('hidden')
-    nav.classList.add('hidden')
-  }else if(pageYOffset >= 60){
-    backToTop.classList.remove('hidden')
-    nav.classList.remove('hidden')
-  }
-  // console.log(window.pageYOffset)
-}
-  
-btn.addEventListener('click', openModal)
-closeBtn.removeEventListener('click', openModal)
-closeBtn.addEventListener('click', closeModal)
-backToTop.addEventListener('click', toTop)
+// function scrollAct(){
+//   const pageYOffset = window.pageYOffset
+//   if(pageYOffset > 0 && pageYOffset < 60){
+//     backToTop.classList.add('hidden')
+//     nav.classList.add('hidden')
+//   }else if(pageYOffset >= 60){
+//     backToTop.classList.remove('hidden')
+//     nav.classList.remove('hidden')
+//   }
+//   // console.log(window.pageYOffset)
+// }
+// backToTop.addEventListener('click', toTop)
 // window.addEventListener('scroll', scrollAct)
 
-// window.onload = ()=> {
-//   backToTop.classList.add('hidden')
-//   nav.classList.add('hidden')
-//   openModal()
-//   setTimeout(() => closeModal(),5000)
-// }
 
-//네비게이션 사이드 메뉴 
+//네비게이션 사이드 메뉴 (드롭다운메뉴 안사라지는거 해결해야함)
 function showNav(e){
+  const menus = document.querySelectorAll('.dropdown-content')
   if(e.target.classList.contains('nav-btn')){
-    const menus = document.querySelectorAll('.dropdown-content')
-    for(let i=0; i < menus.length; i++){
-      menus[i].style.display = 'none'
+    for(let menu of menus){
+      menu.style.display = 'none'
     }
   }
+  const classList = ['first', 'second', 'third', 'fourth']
   const target = e.target.classList
   if(target.contains('first')){
-    navBar[0].style.display = 'block'
+    menus[0].style.display = 'block'
   }else if(target.contains('second')){
-    navBar[1].style.display = 'block'
+    menus[1].style.display = 'block'
   }else if(target.contains('third')){
-    navBar[2].style.display = 'block'
+    menus[2].style.display = 'block'
   }else if(target.contains('fourth')){
-    navBar[3].style.display = 'block'
+    menus[3].style.display = 'block'
   }
-  return
+  return 
 }
 nav.addEventListener('mouseover', showNav)
-nav.removeEventListener('mouseleave', showNav)
+nav.removeEventListener('moseleave', showNav)
 
 
 //API 데이터 가져오기 & 마운트
@@ -101,6 +117,9 @@ function loadAPIData(data){
   .then(response => response.json())
 }
 
+const itemContainer = document.querySelector('scroll-box')
+const itemBox = document.querySelector('.scroll-container')
+
 function showData(data){
   // console.log(data)
   return new Promise(function(resolve, reject){
@@ -108,18 +127,22 @@ function showData(data){
     for(let i=0; i < 10; i++){
       // console.log(data[0].domains.web_pages)
       // const data = response
+            
+      const contentBox = document.createElement('div')
+      contentBox.className = 'content-box'
+
+      const content = document.createElement('div')
+      content.className = 'content'
+      content.innerHTML = `<h2>${data[i].name}</h2>
+                           <button class="popup">More info</button>`
+      contentBox.appendChild(content)
+      
       const images = ["imgs/uni01.avif", "imgs/uni02.avif", "imgs/uni03.avif", "imgs/uni04.avif", "imgs/uni05.avif", "imgs/uni06.avif", "imgs/uni07.avif", "imgs/uni08.avif", "imgs/uni09.avif", "imgs/uni10.avif"]
       const img = document.createElement('img')
       img.className = 'img'
       img.src = images[i]
-            
-      const contentBox = document.createElement('div')
-      contentBox.className = 'content-box'
-      contentBox.innerHTML = `<h2>${data[i].name}</h2>
-                              <button>More info</button>`
-      itemBox.appendChild(contentBox)
       contentBox.appendChild(img)
-
+      itemBox.appendChild(contentBox)
 
       const cards = document.querySelector('.cards')
       const detailCard = document.createElement('div')
@@ -133,6 +156,20 @@ function showData(data){
     }
   })
 }
+
+//card click event
+const popupBtn = document.querySelectorAll('.scroll-box .scroll-container .content-box')
+const cards = document.querySelectorAll('.details')
+console.log(cards)
+console.log(popupBtn)
+// function popup(e){
+//   if(e.target.classList.contains('popup')){
+//     for(let card of cards){
+//       card.classList.add('show')
+//     }
+//   }
+// }
+// cards.addEventListener('click', popup)
 
 loadAPI('http://universities.hipolabs.com/search?country=United+States')
 .then(data => loadAPIData(data))
@@ -166,4 +203,4 @@ itemBox.addEventListener('mousemove', e => {
   itemBox.scrollLeft = scrollLeft - walk
 })
 
-// 마우스 호버시 버튼이 자꾸 나옴 수정 필요
+
