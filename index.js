@@ -8,17 +8,36 @@ const nav = document.querySelector('.nav')
 const navBtn = document.querySelectorAll(".menu")
 const navBar = document.querySelectorAll("dropdown-content")
 console.log(btn.getBoundingClientRect())
+const scroller = new Scroller(false) // 스크롤 객체 생성
 
-
-// 테마 변경(다크 / 일반)
 window.onload = () => {
+
+  //로딩 페이지 구현
+  function loadPage(){
+    const loadingPage = document.createElement('div')
+    loadingPage.className = 'loading-page'
+
+    const spinnerContainer = document.createElement('div')
+    spinnerContainer.className = 'spinner-container'
+    spinnerContainer.innerText = 'Loading...'
+    loadingPage.appendChild(spinnerContainer)
+    document.body.appendChild(loadingPage)
+  }
+  setTimeout(loadPage, 5000)
+
+  scroller.setScrollPosition({top:0, behavior:'smooth'}) // 새로고침시 페이지 상단으로 올리기
+  popModal.classList.add('hidden')
+
+  // 테마 변경(다크 / 일반)
   const mode = document.querySelector('.mode')
   const icons = document.querySelectorAll('.material-symbols-outlined')
   const menuBtn = document.querySelectorAll('.nav-btn')
+  const hamBtn = document.querySelector('.hambtn')
   nav
   mode.addEventListener('click', (e) => {
     document.body.classList.toggle('dark')
     nav.classList.toggle('dark')
+    hamBtn.classList.toggle('dark')
     
     for(let btn of menuBtn){  //메뉴 버튼이 여러개라서 for문으로 돌려서 하나씩 지정해줌
       btn.classList.toggle('dark')
@@ -30,6 +49,7 @@ window.onload = () => {
     }
     console.log(e.target)
   })
+  
 }
 
 // 모달창 열기
@@ -49,6 +69,7 @@ function openModal(){
 }
 
 // 모달창 닫기
+
 function closeModal(){
   modal.classList.remove('show')
   container.classList.remove('show')
@@ -65,20 +86,37 @@ closeBtn.addEventListener('click', closeModal)
 function toTop(){
  document.documentElement.scrollTo({top:0, left:0, behavior: 'smooth'})
 }
-// 스크롤 내렷을때 네비게이션 나오게하기
-// function scrollAct(){
-//   const pageYOffset = window.pageYOffset
-//   if(pageYOffset > 0 && pageYOffset < 60){
-//     backToTop.classList.add('hidden')
-//     nav.classList.add('hidden')
-//   }else if(pageYOffset >= 60){
-//     backToTop.classList.remove('hidden')
-//     nav.classList.remove('hidden')
-//   }
-//   // console.log(window.pageYOffset)
-// }
-// backToTop.addEventListener('click', toTop)
-// window.addEventListener('scroll', scrollAct)
+// 스크롤 내렷을때 사이드 모달창 나오게하기
+const popModal = document.createElement('div')
+popModal.className = 'pop-modal'
+popModal.innerHTML = `<p>Now you're on '---'</p>
+                      <button>
+                      <span class="material-symbols-outlined side-modal-close">close</span>
+                      </button>`
+document.body.appendChild(popModal)
+
+function scrollAct(e){
+  const pageYOffset = window.pageYOffset
+  console.log(pageYOffset)
+  if(pageYOffset > 0 && pageYOffset < 300 ){
+    popModal.classList.add("hidden")
+  }else if(pageYOffset > 300){
+    popModal.classList.remove("hidden")
+  }
+}
+
+const sideModalboxCloseBtn = document.querySelector('.pop-modal button')
+function closeSideModal(e){
+  console.log(e.target)
+  if(e.target.classList.contains('side-modal-close')){
+    popModal.classList.add('hidden')
+  }
+}
+
+backToTop.addEventListener('click', toTop)
+window.addEventListener('scroll', scrollAct)
+sideModalboxCloseBtn.removeEventListener('click', scrollAct)
+sideModalboxCloseBtn.addEventListener('click', closeSideModal)
 
 
 //네비게이션 사이드 메뉴 (드롭다운메뉴 안사라지는거 해결해야함)
@@ -89,7 +127,6 @@ function showNav(e){
       menu.style.display = 'none'
     }
   }
-  const classList = ['first', 'second', 'third', 'fourth']
   const target = e.target.classList
   if(target.contains('first')){
     menus[0].style.display = 'block'
@@ -147,29 +184,43 @@ function showData(data){
       const cards = document.querySelector('.cards')
       const detailCard = document.createElement('div')
       detailCard.className = 'details'
-      detailCard.style.background = `url(${images[i]}) no-repeat center`
-      detailCard.style.backgroundSize = 'cover'
-      detailCard.innerHTML = `<h2>${data[i].name}</h2>
+      detailCard.innerHTML = `<img src=${images[i]}>
+                              <div>
+                              <h2>${data[i].name}</h2>
                               <p>${data[i].country}</p>
-                              <a href = "${data[i].web_pages}">${data[i].web_pages}</a>`
+                              <a href = "${data[i].web_pages}">${data[i].web_pages}</a>
+                              </div>
+                              <button class="pop-close-btn">
+                              <span class="material-symbols-outlined Xbtn">close</span>
+                              </button>`
       cards.appendChild(detailCard)
     }
+
+      //card click event (한개만 클릭됨)
+      const popupBtn = document.querySelector('.content button')
+      const closeBtn = document.querySelector('.Xbtn')
+      console.log(popupBtn)
+      const card = document.querySelector('.details')
+      console.log(card)
+      
+      function popup(e){
+        if(e.target.classList.contains('popup')){
+          console.log(e.target)
+          card.style.display = "block"
+        }
+      }
+
+      function closePopup(e){
+        if(e.target.classList.contains('Xbtn')){
+          console.log(e.target)
+          card.style.display = "none"
+        }
+      }
+      popupBtn.addEventListener('click',popup)
+      closeBtn.removeEventListener('click',popup)
+      closeBtn.addEventListener('click',closePopup)
   })
 }
-
-//card click event
-const popupBtn = document.querySelectorAll('.scroll-box .scroll-container .content-box')
-const cards = document.querySelectorAll('.details')
-console.log(cards)
-console.log(popupBtn)
-// function popup(e){
-//   if(e.target.classList.contains('popup')){
-//     for(let card of cards){
-//       card.classList.add('show')
-//     }
-//   }
-// }
-// cards.addEventListener('click', popup)
 
 loadAPI('http://universities.hipolabs.com/search?country=United+States')
 .then(data => loadAPIData(data))

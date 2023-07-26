@@ -2,10 +2,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-image: url(/imgs/bg-img.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   min-height: 300vh;
   position: relative;
   z-index: -10;
@@ -19,7 +15,6 @@ body::-webkit-scrollbar {
 
 /* dark mode */
 body.dark {
-  background-image: none;
   background: rgba(0, 0, 0, 0.6);
   color: #fff;
 }
@@ -221,16 +216,14 @@ body.dark {
 .scroll-box {
   width: 100%;
   height: 100vh;
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
 }
 .scroll-box .scroll-container {
-  width: 90%;
-  height: 450px;
+  width: 80%;
+  height: 300px;
   margin: auto;
-  position: fixed;
-  top: 50%;
-  left: 50%;
+  position: relative;
+  top: 45%;
+  left: 40%;
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: space-between;
@@ -243,7 +236,7 @@ body.dark {
 }
 .scroll-box .scroll-container .content-box {
   flex: 1 0 auto;
-  width: 600px;
+  width: 400px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
@@ -252,6 +245,7 @@ body.dark {
   text-align: center;
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 .scroll-box .scroll-container .content-box:hover {
@@ -267,18 +261,19 @@ body.dark {
   width: 100%;
 }
 .scroll-box .scroll-container .content-box .content h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 0;
+  margin-bottom: 10px;
 }
 .scroll-box .scroll-container .content-box .content button {
   background-color: orange;
   color: white;
   font-size: 1rem;
   font-weight: bold;
-  position: relative;
-  bottom: -100px;
+  position: absolute;
+  bottom: 50px;
   width: 120px;
-  height: 50px;
+  height: 30px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -296,12 +291,13 @@ body.dark {
 }
 
 .article {
-  width: 800px;
-  height: 500px;
+  width: 300px;
+  height: 400px;
   margin: auto;
-  position: relative;
-  top: -600px;
-  z-index: -5;
+  position: absolute;
+  top: 600px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .article .cards {
   width: 100%;
@@ -309,32 +305,88 @@ body.dark {
   display: flex;
 }
 .article .cards .details {
-  border: 15px solid white;
+  border: 5px solid white;
+  background: white;
   flex: 1 0 auto;
   width: 95%;
-  height: 95%;
-  padding: 0;
-  margin: 0 10px;
+  height: 60%;
+  padding: 10px;
+  margin-right: 10px;
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3);
   display: none;
+  text-align: center;
+  transition: 0.3s;
+}
+.article .cards .details img {
+  width: 50%;
+  margin: 15px;
 }
 .article .cards .details h2 {
   margin: 0;
-  font-size: 3rem;
+  font-size: 1.5rem;
   text-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
 }
 .article .cards .details p {
-  font-size: 2rem;
-  color: white;
+  font-size: 1rem;
+  color: darkslategray;
+  margin: 0;
 }
 .article .cards .details a {
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-decoration: none;
-  color: lightpink;
+  color: lightgrey;
+}
+.article .cards .details .pop-close-btn {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 15px;
+  right: 5px;
+  cursor: pointer;
+  z-index: 3;
+  text-align: center;
+}
+.article .cards .details .pop-close-btn span {
+  font-size: 1rem;
+}
+.article .cards .details .pop-close-btn:hover {
+  box-shadow: 0 0 0.2rem white;
+}
+
+.pop-modal {
+  width: 300px;
+  height: 80px;
+  background-color: lightgoldenrodyellow;
+  position: fixed;
+  right: 50px;
+  bottom: 150px;
+  border-radius: 20px;
+  color: #000000;
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3);
+}
+.pop-modal p {
+  text-align: center;
+  line-height: 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.pop-modal button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.main-content {
+  width: 100%;
+  height: 100vh;
+  background-color: #333;
 }
 
 @media (max-width: 785px) {
@@ -356,7 +408,23 @@ body.dark {
   }
 }
 @media (max-width: 480px) {
-  .nav .menu {
+  .nav .menu,
+  .nav .person,
+  .nav .mode {
     display: none;
+  }
+  .nav .hambtn {
+    display: block;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .nav .hambtn span {
+    font-size: 2rem;
+    margin-top: 5px;
+    font-weight: bold;
   }
 }/*# sourceMappingURL=style.css.map */
