@@ -1,3 +1,5 @@
+@import url('/reset.css');
+
 body{
     margin: 0;
     padding: 0;
@@ -35,6 +37,8 @@ body.dark{
 
     h1{
         cursor: pointer;
+        font-size: 2rem;
+        font-weight: bold;
     }
     .hambtn{
         display: none;
@@ -89,6 +93,46 @@ body.dark{
             }
         }
     }
+    .search-box{
+        // border: 1px solid red;
+        height: 30px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+
+        input{
+            width: 80%;
+            height: 100%;
+            margin: 0;
+            padding: 0 10px;
+            border-radius: 15px 0 0 15px;
+            border: 1px solid #008b8b;
+
+            &:focus{
+                outline: none;
+            }
+        }
+        button{
+            margin: 0;
+            height: 32px;
+            border-radius: 0 15px 15px 0;
+            border: 1px solid darkcyan;
+            background-color: darkcyan;
+            color: #fff;
+            font-size: 0.7rm;
+            cursor: pointer;
+
+            &:hover{
+                background-color: rgba($color: #008b8b, $alpha: 0.8);
+                letter-spacing: 0.01rem;
+            }
+        }
+        .data-list{
+            border: 1px solid red;
+            width: 80%;
+        }
+
+    }
     .person{
         display: flex;
         justify-content: space-between;
@@ -101,6 +145,7 @@ body.dark{
             background-color: darkcyan;
             display: inline-block;
             margin: 20px;
+            cursor: pointer;
         }
         // 모달창 열기 버튼
         .open-btn{
@@ -259,7 +304,7 @@ body.dark{
         height: 300px;
         margin: auto;
         position: relative;
-        top: 45%;
+        top: 80%;
         left: 40%;
         transform: translate(-50%, -50%);
         display: flex;
@@ -274,34 +319,38 @@ body.dark{
 
         .content-box{
             flex: 1 0 auto;
-            width: 400px;
+            width: 200px;
             height: 100%;
-            background-color: rgba($color: #000000, $alpha: 0.3);
-            color: white;
-            border-radius: 20px;
-            margin-right: 20px;
+            background-color: lightgrey;
+            color: black;
+            border-radius: 5px;
+            margin-right: 10px;
             text-align: center;
             display: flex;
+            flex-direction: column-reverse;
             align-items: center;
             justify-content: center;
             cursor: pointer;
 
             &:hover{
-                box-shadow: 0 0 0.8rem rgba($color: #000000, $alpha: 0.3);
-                transform: scale(0.95);
+                box-shadow: 0 0 0.3rem rgba($color: #000000, $alpha: 0.3);
+                background-color: rgba($color: #008b8b, $alpha: 0.3);
             }
             .content{
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                // justify-content: center;
                 align-items: center;
                 height: 100%;
                 width: 100%;
 
                 h2{
-                    font-size: 1.5rem;
+                    font-size: 1rem;
+                    font-weight: bold;
                     margin: 0;
+                    margin-top: 5px;
                     margin-bottom: 10px;
+                    line-height: 1.3rem;
                 }
                 button{
                     background-color: orange;
@@ -309,7 +358,7 @@ body.dark{
                     font-size: 1rem;
                     font-weight: bold;
                     position: absolute;
-                    bottom: 50px;
+                    bottom: 20px;
                     width: 120px;
                     height: 30px;
                     border: none;
@@ -320,10 +369,11 @@ body.dark{
             
             .img{
                 width: 90%;
-                height: 90%;
+                height: 100%;
                 overflow: hidden;
-                border-radius: 20px;
-                margin-right: 20px;
+                // border-radius: 20px;
+                margin-top: 10px;
+                margin-bottom: 10px;
             }
         }
     }
@@ -332,45 +382,63 @@ body.dark{
     transform: scale(1.02);
 }
 .article{
-    width: 300px;
-    height: 400px;
+    // border: 1px solid blue;
+    width: 450px;
+    height: 500px;
     margin: auto;
     position: absolute;
-    top: 600px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
 
     .cards{
+        // border: 1px solid red;
         width: 100%;
         height: 100%;
         display: flex;
 
         .details{
-            border: 5px solid white;
+            // border: 5px solid white;
             background: white;
             flex: 1 0 auto;
             width: 95%;
-            height: 60%;
-            padding: 10px;
+            height: 100%;
             margin-right: 10px;
             border-radius: 20px;
             box-shadow: 0 0 0.2rem rgba($color: #000000, $alpha: 0.3);
             display: none;
             text-align: center;
             transition: 0.3s;
+            padding: 0 10px;
             img{
-                width: 50%;
-                margin: 15px;
+                width: 40%;
+                margin-top: 0;
             }
             h2{
+                margin: 5px 0;
+                height: 30px;
+            }
+            h2 > a{
+                color: #008b8b;
                 margin: 0;
-                font-size: 1.5rem;
-                text-shadow: 0 0 1rem rgba($color: #000000, $alpha: 0.3);
+                font-weight: bold;
+                font-size: 1rem;
+                line-height: 0.8rem;
             }
             p{
                 font-size: 1rem;
                 color: darkslategray;
-                margin: 0;
+                margin: 5px 0;
+
+                &:nth-of-type(1){
+                    font-weight: bold;
+                }
+                &:nth-of-type(2){
+                    font-size: 0.8rem;
+                }
+                &:nth-of-type(3){
+                    line-height: 1.2rem;
+                }
             }
             a{
                 font-size: 1rem;
@@ -385,7 +453,7 @@ body.dark{
                 border: none;
                 position: absolute;
                 top: 15px;
-                right: 5px;
+                right: 15px;
                 cursor: pointer;
                 z-index: 3;
                 text-align: center;
@@ -403,19 +471,18 @@ body.dark{
 }
 .pop-modal{
     width: 300px;
-    height: 80px;
+    height: 100px;
     background-color: lightgoldenrodyellow;
     position: fixed;
     right: 50px;
     bottom: 150px;
-    border-radius: 20px;
     color: #000000;
     box-shadow: 0 0 0.3rem rgba($color: #000000, $alpha: 0.3);
     // display: none;
 
-    p{
+    &>p{
         text-align: center;
-        line-height: 40px;
+        line-height: 100px;
         font-size: 1.2rem;
         font-weight: bold;
     }
@@ -430,8 +497,61 @@ body.dark{
 }
 .main-content{
     width: 100%;
-    height: 100vh;
-    background-color: #333;
+    // background-color: #333;
+
+    .description-card-container{
+        // border: 1px solid red;
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .card{
+            background-color: white;
+            margin:5px;
+            width: 250px;
+            color: #000000;
+            box-shadow: 0 0 0.3rem rgba($color: #000000, $alpha: 0.3);
+            position: relative;
+
+            ul{ 
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                padding: 0 5px;
+
+                
+                li{
+                    margin: 5px 0;
+                    text-align: center;
+                }
+                li.name{
+                    font-size: 1rem;
+                    font-weight: bold;
+                    height: 32px;
+                }
+                li.brand{
+                    color: darkgray;
+                }
+                li.decription{
+                    padding: 0 10px;
+                }
+                li.product-url button{
+                    border: none;
+                    background-color: #008b8b;
+                    color: #fff;
+                    width: 6rem;
+                    height: 2rem;
+                    cursor: pointer;
+                    position: relative;
+                    bottom: 5px;
+                }
+            }
+        }
+    }
 }
 @media (max-width:785px){
     .nav{
