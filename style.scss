@@ -93,46 +93,6 @@ body.dark{
             }
         }
     }
-    .search-box{
-        // border: 1px solid red;
-        height: 30px;
-        padding: 0;
-        display: flex;
-        align-items: center;
-
-        input{
-            width: 80%;
-            height: 100%;
-            margin: 0;
-            padding: 0 10px;
-            border-radius: 15px 0 0 15px;
-            border: 1px solid #008b8b;
-
-            &:focus{
-                outline: none;
-            }
-        }
-        button{
-            margin: 0;
-            height: 32px;
-            border-radius: 0 15px 15px 0;
-            border: 1px solid darkcyan;
-            background-color: darkcyan;
-            color: #fff;
-            font-size: 0.7rm;
-            cursor: pointer;
-
-            &:hover{
-                background-color: rgba($color: #008b8b, $alpha: 0.8);
-                letter-spacing: 0.01rem;
-            }
-        }
-        .data-list{
-            border: 1px solid red;
-            width: 80%;
-        }
-
-    }
     .person{
         display: flex;
         justify-content: space-between;
@@ -498,6 +458,69 @@ body.dark{
 .main-content{
     width: 100%;
     // background-color: #333;
+    .search-container{
+        // border: 1px solid red;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 8rem;
+        margin-bottom: 2rem;
+        .search-bar{
+            width: 50%;
+            height: 50%;
+            outline: none;
+            padding-left: 4.5rem;
+            border-radius: 2rem;
+            font-size: 1.5rem;
+            border: 3px solid #008b8b;
+        }
+        .search-content{
+            // border: 1px solid red;
+            width: 50%;
+            height: 0;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            position: relative;
+            top: -35px;
+            & span:nth-child(1){
+                // border: 1px solid rebeccapurple;
+                position: absolute;
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #bbb;
+            }
+            & span:nth-child(2){
+                position: absolute;
+                left: 0rem;
+                font-weight: bold;
+                font-size: 2rem;
+                padding-top: 5px;
+            }
+            & span:nth-child(3){
+                position: absolute;
+                right: 0rem;
+                cursor: pointer;
+                font-size: 2rem;
+                font-weight: bold;
+                padding-top: 5px;
+                color: #aaa;
+
+
+            }
+            & span:nth-child(3):hover{
+                color: #008b8b;
+            }
+            
+        }
+        .suggestions-cap{
+            border: 1px solid red;
+            border-top: none;
+            width: 40%;
+            height: 50%;
+        }
+    }
 
     .description-card-container{
         // border: 1px solid red;
@@ -570,33 +593,33 @@ body.dark{
         }
     }
 }
-@media (max-width:695px){
-    .nav{
-        h1{
-            font-size: 1.2rem;
-        }
-    }
-}
-@media (max-width:480px){
-    .nav .menu,
-    .nav .person,
-    .nav .mode{
-        display: none;
-    }
-    .nav .hambtn{
-        display: block;
-        border: none;
-        background-color: rgba($color: #000000, $alpha: 0);
-        width: 50px;
-        height: 50px;
-        text-align: center;
-        cursor: pointer;
-        span{
-            font-size: 2rem;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-    }
-}
+// @media (max-width:695px){
+//     .nav{
+//         h1{
+//             font-size: 1.2rem;
+//         }
+//     }
+// }
+// @media (max-width:480px){
+//     .nav .menu,
+//     .nav .person,
+//     .nav .mode{
+//         display: none;
+//     }
+//     .nav .hambtn{
+//         display: block;
+//         border: none;
+//         background-color: rgba($color: #000000, $alpha: 0);
+//         width: 50px;
+//         height: 50px;
+//         text-align: center;
+//         cursor: pointer;
+//         span{
+//             font-size: 2rem;
+//             margin-top: 5px;
+//             font-weight: bold;
+//         }
+//     }
+// }
 
 

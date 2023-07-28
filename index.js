@@ -176,40 +176,48 @@ function showData(data){
       const brandName = data[i].brand
       const category = data[i].category
       const productType = data[i].product_type
-      const rating = data[i].rating
-      const productArr = {productName, brandName, category, productType, rating}
+      const productImg = data[i].image_link
+      const productArr = {productName, brandName, category, productType}
       productDetail.push(productArr)
     }
     console.log(productDetail)
 
-    const searchBox = document.querySelector('.nav .search-box')
-    const searchInput = document.querySelector('.nav .search-box .keyword')
-    const dataList = document.querySelector('.data-list')
-    const datas = productDetail
-
-    function addData(datas){
-      for(let data of datas){
-        const item = `<div class="data-item">${data}</div>`
-        dataList.innerHTML = dataList.innerHTML + item
-      }
+    function searchFunc(dataName){
+      //input에 입력되는 value값을 변수에저장
+      //매개변수로 입력될 객체의 아이디에 value값이 있다면 true, 없디면 false 반환
+      searchName = searchInput.value
+      return dataName.indexOf(searchName) !== -1
     }
+    
+    function showFilteredData(data){
+      const containerCap = document.querySelector('.suggestions-cap')
+      resultContainer.style.display ='block'
+      containerCap.style.display ='block'
 
-    function typeKeyword(e){
-      console.log(e.target.value)
-      if(e.target.value !== ''){
-        console.log('you typed something')
-        dataList.classList.add('show')
-        console.log(dataList)
-      }else{
-        console.log('you did not type anything')
-        dataList.classList.remove('show')
-      }
+      const filteredOne = document.createElement('li')
+      filteredOne.innerHTML = `<img src=${data.productImg} alt = "">
+                              <div class="suggestion-container">
+                                <p class="suggestion-productName">${data.productName}</p>
+                                <p class="suggestion-categoy">${data.category}</p>
+                              </div>`
+      filteredList.append(filteredOne)
     }
+    const searchInput = document.querySelector('.main-content .search-container .search-bar')
+    searchInput.addEventListener('keyup', (e) =>{
+      //초기화
+      filteredList.innerHTML = ''
+      resultContainer.style.display = 'none'
 
-    addData(datas)
-    searchInput.addEventListener('input', typeKeyword)
+      //input값이 있다면
+      if(searchInput.value){
+        const filteredProduct = productDetail.filter((x)=> searchFunc(x.productName))
 
-
+      //filteredProduct 배열이 있다면
+      if(filteredProduct){
+        filteredProduct.forEach((product) => showFilteredData(product))
+      }
+      }
+    })
   })
 }
 

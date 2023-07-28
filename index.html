@@ -7,11 +7,12 @@
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   
+  
 </head>
 
 <body >
   <div class="nav">
-  <h1>HELLO WORLD!</h1>
+  <h1>Maybelline</h1>
     <button class="hambtn">
       <span class="material-symbols-outlined">
         menu
@@ -55,13 +56,6 @@
         </div>
       </div>
 
-       <!-- 검색창 -->
-      <section class="search-box">
-        <input type="text" class="keyword" placeholder="검색어를 입력하세요">
-        <button class="search">search</button>
-        <div class="data-list"></div>
-      </section>
-
       <div class="person">
         <div class="avatar"></div>
         <button type="button" class="open-btn">OPEN</button>
@@ -98,6 +92,19 @@
     </div>
   </section>
   <section class="main-content">
+     <!-- 검색창 -->
+     <div class="search-container">
+      <input class="search-bar" type="text" />
+      <div class="search-content">
+        <span class="search">검색하려면 클릭하세요</span>
+        <span class="material-symbols-outlined">search</span>
+        <span class="material-symbols-outlined">cancel</span>
+      </div>
+      <div class="suggestions-cap"></div>
+        <div class="suggestions-container">
+        <ul class="suggestions-list"></ul>
+        </div>
+    </div>
   </section>
 
   <script src="/scroll.js"></script>
